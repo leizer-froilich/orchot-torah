@@ -203,7 +203,7 @@ h2 .gold,.hero h1 .gold{background-image:linear-gradient(to left,#7E5E2A 0%,#C29
 .hero__sub{font-size:clamp(1.0625rem,1.3vw,1.375rem);font-weight:var(--w-light);color:var(--cream-70);max-width:64ch;line-height:1.5}
 .hero__sub b{font-weight:var(--w-bold);color:var(--parch)}
 .hero .ctas{margin-top:8px}
-.hero__frame{position:absolute;z-index:4;inset:auto var(--margin) 28px;display:flex;justify-content:center;align-items:end;
+.hero__frame{position:absolute;z-index:4;inset:auto var(--margin) 28px;display:flex;justify-content:left;align-items:end;
   font-size:var(--fs-note);letter-spacing:.14em;color:var(--cream-70);pointer-events:none}
 .scrollhint{display:flex;align-items:center;gap:10px}
 .scrollhint i{display:block;width:1px;height:42px;background:linear-gradient(var(--gold),transparent);position:relative;overflow:hidden}
