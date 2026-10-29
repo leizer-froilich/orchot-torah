@@ -203,7 +203,7 @@ h2 .gold,.hero h1 .gold{background-image:linear-gradient(to left,#7E5E2A 0%,#C29
 .hero__sub{font-size:clamp(1.0625rem,1.3vw,1.375rem);font-weight:var(--w-light);color:var(--cream-70);max-width:64ch;line-height:1.5}
 .hero__sub b{font-weight:var(--w-bold);color:var(--parch)}
 .hero .ctas{margin-top:8px}
-.hero__frame{position:absolute;z-index:4;inset:auto var(--margin) 28px;display:flex;justify-content:flex-start;align-items:end;
+.hero__frame{position:absolute;z-index:4;inset:auto var(--margin) 28px;display:flex;justify-content:center;align-items:end;
   font-size:var(--fs-note);letter-spacing:.14em;color:var(--cream-70);pointer-events:none}
 .scrollhint{display:flex;align-items:center;gap:10px}
 .scrollhint i{display:block;width:1px;height:42px;background:linear-gradient(var(--gold),transparent);position:relative;overflow:hidden}
@@ -395,14 +395,9 @@ h2 .gold,.hero h1 .gold{background-image:linear-gradient(to left,#7E5E2A 0%,#C29
 .ftr__bottom{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:var(--cream-40)}
 .ftr__bottom a:hover{color:var(--parch)}
 
-/* ---------- floating WhatsApp ---------- */
-.wa{position:fixed;right:calc(24px + env(safe-area-inset-right,0px));bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:40;width:58px;height:58px;border-radius:50%;
-  display:grid;place-items:center;background:#25D366;box-shadow:0 10px 30px rgba(0,0,0,.25);transition:transform .3s var(--ease),opacity .6s;opacity:0}
-.is-ready .wa{opacity:1}
-.wa:hover{transform:scale(1.08)}
-
-/* ---------- "להתחבר לקול התורה": ambient beit-midrash sound, off by default ---------- */
-.kol{position:fixed;left:calc(24px + env(safe-area-inset-left,0px));bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:40;
+/* ---------- "להתחבר לקול התורה": ambient beit-midrash sound, off by default; bottom right in both languages,
+   icon on the right edge, the label opens to its left ---------- */
+.kol{position:fixed;right:calc(24px + env(safe-area-inset-right,0px));bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:40;
   display:inline-flex;align-items:center;gap:0;height:58px;padding-block:0;padding-inline:7px;border-radius:999px;cursor:pointer;
   background:rgba(14,28,42,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(194,154,91,.45);
   color:var(--parch);font-weight:var(--w-bold);font-size:var(--fs-note);letter-spacing:.02em;box-shadow:0 14px 34px -14px rgba(0,0,0,.55);
@@ -411,9 +406,10 @@ h2 .gold,.hero h1 .gold{background-image:linear-gradient(to left,#7E5E2A 0%,#C29
 .kol:hover{border-color:var(--gold-hi)}
 /* compact by default: just the round play icon; the label opens on hover / keyboard focus */
 .kol__txt{max-width:0;opacity:0;overflow:hidden;white-space:nowrap;transition:max-width .55s var(--ease),opacity .35s}
-.kol:hover,.kol:focus-visible{gap:12px;padding-inline-end:22px}
+[dir="ltr"] .kol{flex-direction:row-reverse}
+.kol:hover,.kol:focus-visible{gap:12px;padding-left:22px}
 .kol:hover .kol__txt,.kol:focus-visible .kol__txt{max-width:14em;opacity:1;transition:max-width .55s var(--ease),opacity .4s .12s}
-.kol.is-on{gap:12px;padding-inline-end:18px}
+.kol.is-on{gap:12px;padding-left:18px}
 .kol__icon{position:relative;width:42px;height:42px;border-radius:50%;background:var(--gold-metal);display:grid;place-items:center;flex:none;
   transition:transform .5s var(--ease)}
 .kol:hover .kol__icon{transform:scale(1.07)}
@@ -479,7 +475,7 @@ h2 .gold,.hero h1 .gold{background-image:linear-gradient(to left,#7E5E2A 0%,#C29
   .hdr .btn{padding:.75em 1.15em}
   .hero{min-height:600px}
   .hero__in{padding-top:calc(var(--hd) + 10px);padding-bottom:104px}
-  .kol{left:calc(14px + env(safe-area-inset-left,0px));bottom:calc(24px + env(safe-area-inset-bottom,0px));height:54px;padding-inline:6px}
+  .kol{right:calc(14px + env(safe-area-inset-right,0px));bottom:calc(24px + env(safe-area-inset-bottom,0px));height:54px;padding-inline:6px}
   .kol__icon{width:40px;height:40px}
   .hero__in{grid-template-rows:1fr auto;grid-template-columns:minmax(0,1fr)}
   .hero__rav{--rw:min(150vw,calc((100svh - var(--hd) - var(--tb)) * 1.99))}
