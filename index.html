@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ארחות תורה · רשת הישיבות שייסד מרן הרב שטיינמן זצ״ל</title>
+<meta name="description" content="רשת ישיבות ארחות תורה: 4,500 בחורים וכעשרים כוללים ברחבי הארץ. שותפים בלימוד התורה: שעת לימוד, יום, שבוע וחודש בכל הרשת.">
+<meta name="theme-color" content="#182E42">
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="is-loading">
+
+<!-- shared gold gradient for every ornament -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="gm" x1="0" y1="0" x2="1" y2=".25">
+      <stop offset="0" stop-color="#8C6A32"/><stop offset=".25" stop-color="#C29A5B"/><stop offset=".45" stop-color="#F3DFA6"/>
+      <stop offset=".6" stop-color="#C9A263"/><stop offset=".8" stop-color="#8C6A32"/><stop offset="1" stop-color="#E2C384"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<!-- preloader -->
+<div class="pre tex" id="pre" aria-hidden="true">
+  <div class="pre__logo" id="preLogo">
+    <img data-p="frame-bl" src="assets/logos/parts/frame-bl.webp" alt=""><img data-p="frame-br" src="assets/logos/parts/frame-br.webp" alt="">
+    <img data-p="frame-tl" src="assets/logos/parts/frame-tl.webp" alt=""><img data-p="frame-tr" src="assets/logos/parts/frame-tr.webp" alt="">
+    <img data-p="w3" src="assets/logos/parts/w3.webp" alt=""><img data-p="w2" src="assets/logos/parts/w2.webp" alt="">
+    <img data-p="w1" src="assets/logos/parts/w1.webp" alt=""><img data-p="en" src="assets/logos/parts/en.webp" alt="">
+  </div>
+  <div class="pre__bar"><i></i></div>
+  <div class="pre__pct"><span id="pct">0</span>%</div>
+</div>
+
+<!-- header: floating pill -->
+<header class="hdr" id="hdr">
+  <button class="menu" id="menu" type="button" aria-label="פתיחת תפריט" aria-expanded="false" aria-controls="drawer"><span></span></button>
+  <nav aria-label="ניווט ראשי">
+    <a href="#about">הרשת</a><a href="#founder">המייסד</a><a href="#network">הישיבות</a><a href="#history">היסטוריה</a><a href="#contact">צור קשר</a>
+  </nav>
+  <a class="hdr__logo" href="#top" aria-label="ארחות תורה · לראש העמוד"><img src="assets/logos/mosdot-light.png" alt="מוסדות ארחות תורה"></a>
+  <div class="hdr__end">
+    <a class="hdr__lang" href="en.html" lang="en" hreflang="en" aria-label="English">EN</a>
+    <a class="btn btn--gold" href="#donate">תרומה</a>
+  </div>
+</header>
+<nav class="drawer tex dark" id="drawer" aria-label="תפריט נייד">
+  <button class="drawer__close" id="drawerClose" type="button" aria-label="סגירת תפריט">סגירה</button>
+  <a href="#about">הרשת</a><a href="#founder">המייסד</a><a href="#network">הישיבות</a><a href="#history">היסטוריה</a><a href="#contact">צור קשר</a>
+  <a class="btn btn--gold" href="#donate">החזיקו שעת לימוד <span class="arrow">←</span></a>
+  <a class="drawer__lang" href="en.html" lang="en" hreflang="en">English</a>
+</nav>
+
+<main>
+  <!-- HERO: the hall of students, Rav Steinman above them in a gold arch, sparks of holiness -->
+  <section class="hero dark" id="top">
+    <div class="hero__media"><video id="heroVideo" muted loop playsinline preload="auto" poster="assets/video/hero-hall.jpg"><source src="assets/video/hero-hall.mp4" type="video/mp4"></video></div>
+    <div class="hero__shade"></div>
+    <canvas class="hero__sparks" id="sparks" aria-hidden="true"></canvas>
+
+    <div class="hero__in">
+      <figure class="hero__rav" data-in="1">
+        <span class="hero__halo" aria-hidden="true"></span>
+        <div class="hero__float"><img src="assets/img/rav-steinman-cut.webp" alt="מרן הרב אהרן יהודה לייב שטיינמן זצ״ל"></div>
+      </figure>
+
+      <div class="hero__text">
+        <h1 data-in="3"><span class="gold">הישיבה הגדולה</span> <span class="ol">בעולם</span></h1>
+        <p class="hero__sub" data-in="4"><b>4,500 בחורים</b> לומדים תורה יומם ולילה, ברשת הישיבות והכוללים שייסד מרן הרב שטיינמן זצ״ל ברחבי ארץ ישראל.</p>
+        <div class="ctas" data-in="5">
+          <a class="btn btn--gold" href="#donate">החזיקו שעת לימוד <span class="arrow">←</span></a>
+          <a class="btn btn--ghost" href="#about">הכירו את הרשת</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__frame" aria-hidden="true">
+      <span class="scrollhint">גללו <i></i></span>
+    </div>
+
+    <svg class="hero__sketch" id="sketch" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path d="M0 760H1440"/>
+      <path d="M60 760V420a70 70 0 0 1 140 0v340"/><path d="M250 760V420a70 70 0 0 1 140 0v340"/>
+      <path d="M1050 760V420a70 70 0 0 1 140 0v340"/><path d="M1240 760V420a70 70 0 0 1 140 0v340"/>
+      <path d="M600 520V300a120 120 0 0 1 240 0v220"/><path d="M584 520V300a136 136 0 0 1 272 0v220"/>
+      <path d="M520 190L720 70l200 120"/><path d="M520 190v40M920 190v40"/>
+      <path d="M440 760l90-120h380l90 120"/><path d="M530 640v-50h380v50"/>
+      <path d="M700 40l20-34 20 34-20 30z"/>
+    </svg>
+    <canvas class="hero__ink" id="ink" aria-hidden="true"></canvas>
+  </section>
+
+  <!-- ABOUT THE NETWORK -->
+  <section class="g-parch tex wrap" id="about">
+    <div class="about__grid">
+      <div class="about__text">
+        <svg class="orn reveal" data-orn viewBox="0 0 360 64" aria-hidden="true"></svg>
+        <h2 class="reveal">בית אחד של תורה, <span class="gold">בכל רחבי הארץ</span></h2>
+        <p class="pasuk reveal reveal-d1">וְהָגִיתָ בּוֹ יוֹמָם וָלַיְלָה<cite>יהושע א, ח</cite></p>
+        <p class="reveal reveal-d1">בחודש סיון תשנ״ח ייסד מרן הרב אהרן יהודה לייב שטיינמן זצ״ל את ישיבת ארחות תורה בבני ברק. מאז צמחה הישיבה לרשת של ישיבות גדולות, ישיבות לצעירים וכעשרים כוללי אברכים, מהגליל ועד הנגב.</p>
+        <p class="reveal reveal-d2">בכל אחד מהיכלי הרשת נשמר הדרך שהתווה מרן: לימוד בשקט ובענווה, בלי תחרות בין התלמידים, מתוך אהבת תורה ויראת שמים.</p>
+        <a class="link reveal reveal-d3" href="#history">לתולדות הרשת <span>←</span></a>
+      </div>
+      <div class="about__visual archf reveal">
+        <span class="offset" aria-hidden="true"></span>
+        <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path fill="url(#gm)" d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg>
+        <div class="arch"><img src="assets/img/orchot-torah.jpg" alt="היכל ישיבת ארחות תורה בבני ברק מלא בחורים" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NUMBERS -->
+  <section class="g-navy tex dark wrap" id="numbers">
+    <div class="s-head s-head--c">
+      <svg class="orn orn--c reveal" data-orn viewBox="0 0 360 64" aria-hidden="true"></svg>
+      <h2 class="reveal">ארחות תורה <span class="gold">במספרים</span></h2>
+    </div>
+    <div class="stats">
+      <div class="stat reveal">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5c3-1.6 6-1.6 8 0v12c-2-1.6-5-1.6-8 0zM20 6.5c-3-1.6-6-1.6-8 0v12c2-1.6 5-1.6 8 0z"/></svg>
+        <div class="stat__n" data-count="4500">0</div><div class="stat__l">בחורים לומדים ברשת</div>
+      </div>
+      <div class="stat reveal reveal-d1">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21V10l9-6 9 6v11M9 21v-5a3 3 0 0 1 6 0v5M2 21h20"/></svg>
+        <div class="stat__n" data-count="28">0</div><div class="stat__l">ישיבות וכוללים ברחבי הארץ</div>
+      </div>
+      <div class="stat reveal reveal-d2">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM16 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM2 20c0-3 2.7-5 6-5s6 2 6 5M14.5 15.3c.5-.2 1-.3 1.5-.3 3.3 0 6 2 6 5"/></svg>
+        <div class="stat__n" data-count="1300">0</div><div class="stat__l">אברכים בכוללי הרשת</div>
+      </div>
+      <div class="stat reveal reveal-d3">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12M6 21h12M7 3c0 5 5 6 5 9s-5 4-5 9M17 3c0 5-5 6-5 9s5 4 5 9"/></svg>
+        <div class="stat__n" data-count="1400000" data-suffix="+">0</div><div class="stat__l">שעות לימוד בכל חודש</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDER -->
+  <section class="g-bordeaux tex dark wrap" id="founder">
+    <div class="founder__grid">
+      <figure class="founder__visual archf reveal" style="margin:0">
+        <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path fill="url(#gm)" d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg>
+        <div class="arch"><video muted loop playsinline preload="none" poster="assets/video/founder.jpg" data-lazy-video><source src="assets/video/founder.mp4" type="video/mp4"></video></div>
+        <figcaption class="plate">מרן זצ״ל בהיכל הישיבה, בין תלמידיו</figcaption>
+      </figure>
+      <div class="founder__text">
+        <svg class="orn reveal" data-orn viewBox="0 0 360 64" aria-hidden="true"></svg>
+        <h2 class="reveal">מרן הרב <span class="gold">שטיינמן</span> זצ״ל</h2>
+        <div class="founder__years reveal reveal-d1">מייסד הישיבה · תרע״ד - תשע״ח</div>
+        <p class="reveal reveal-d1">ממנהיגי הדור ומגדולי מרביצי התורה. בצעירותו למד בישיבת תורת חסד בבריסק, ואת ארחות תורה ייסד כבית שבו כל בחור יכול לגדול בתורה בשקט, בענווה ולשם שמים.</p>
+        <p class="reveal reveal-d2">על פי הוראתו, ושלא כמקובל, השיעורים בישיבה לא פוצלו לשנים, כדי למנוע תחרות בין התלמידים. מרן הגיע לישיבה פעמים רבות ומסר בה שיעורים, ועד היום הרשת כולה נושאת את דרכו.</p>
+        <div class="roshim reveal reveal-d3">
+          <div><b>ראשי הישיבה:</b> הרב איתמר גרבוז · הרב ברוך דב דיסקין · הרב יחיאל קלרמן · הרב צבי יהודה אדלשטיין</div>
+          <div><b>נשיא הישיבה:</b> הרב שרגא נח שטיינמן</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NETWORK: pinned horizontal gallery of arch cards -->
+  <section class="net g-parch tex" id="network">
+    <div class="net__pin" style="--n:8">
+      <div class="net__stage">
+        <div class="net__head wrap">
+          <div class="s-head">
+            <svg class="orn reveal" data-orn viewBox="0 0 360 64" aria-hidden="true"></svg>
+            <h2 class="reveal">ישיבות <span class="gold">הרשת</span></h2>
+          </div>
+          <div class="net__count" aria-hidden="true"><span id="netNow">01</span> / 08</div>
+        </div>
+        <div class="net__track" id="netTrack" data-lenis-prevent-touch>
+          <a class="ycard archf" href="#">
+            <div class="arch"><img src="assets/img/orchot-torah.jpg" alt="ישיבת ארחות תורה" loading="lazy"><img class="ycard__logo on-dark" src="assets/logos/orchot-torah.png" alt=""></div>
+            <div class="ycard__body"><span class="ycard__meta">בני ברק · תשנ״ח</span><h3>ישיבת ארחות תורה</h3></div>
+          </a>
+          <a class="ycard archf" href="#">
+            <div class="arch"><img src="assets/img/rinah-shel-torah.jpg" alt="ישיבת רנה של תורה" loading="lazy"><img class="ycard__logo on-dark" src="assets/logos/rinah-shel-torah.png" alt=""></div>
+            <div class="ycard__body"><span class="ycard__meta">כרמיאל · תשע״א</span><h3>רנה של תורה</h3></div>
+          </a>
+          <a class="ycard archf" href="#">
+            <div class="arch"><img src="assets/img/torat-chesed.jpg" alt="ישיבת תורת חסד" loading="lazy"><img class="ycard__logo on-dark" src="assets/logos/torat-chesed.png" alt=""></div>
+            <div class="ycard__body"><span class="ycard__meta">אלעד · ישיבה לצעירים · תשע״ב</span><h3>תורת חסד</h3></div>
+          </a>
+          <a class="ycard archf" href="#">
+            <div class="arch"><img src="assets/img/ner-zerach.jpg" alt="ישיבת נר זרח" loading="lazy"><img class="ycard__logo on-dark" src="assets/logos/ner-zerach.png" alt=""></div>
+            <div class="ycard__body"><span class="ycard__meta">מושב עוצם · תשע״ג</span><h3>נר זרח</h3></div>
+          </a>
+          <a class="ycard archf" href="#">
+            <div class="arch"><img src="assets/img/torah-btifartah.jpg" alt="ישיבת תורה בתפארתה" loading="lazy"><img class="ycard__logo on-dark" src="assets/logos/torah-btifartah.png" alt=""></div>
+            <div class="ycard__body"><span class="ycard__meta">ישיבה גדולה · תשע״ד</span><h3>תורה בתפארתה</h3></div>
+          </a>
+          <a class="ycard archf" href="#">
+            <div class="arch solid"><img src="assets/logos/imrei-moshe.png" alt="ישיבת אמרי משה" loading="lazy" style="filter:brightness(0) invert(.92) sepia(.3)"></div>
+            <div class="ycard__body"><span class="ycard__meta">ירושלים · ישיבה לצעירים · תשע״ו</span><h3>אמרי משה</h3></div>
+          </a>
+          <a class="ycard archf" href="#">
+            <div class="arch"><img src="assets/img/romemut-hatorah.jpg" alt="ישיבת רוממות התורה" loading="lazy"><img class="ycard__logo on-dark" src="assets/logos/romemut-hatorah.png" alt=""></div>
+            <div class="ycard__body"><span class="ycard__meta">בני ברק · ישיבה לצעירים · תשפ״ב</span><h3>רוממות התורה</h3></div>
+          </a>
+          <a class="ycard archf" href="#">
+            <div class="arch"><img src="assets/img/gallery-04.jpg" alt="אברכים בכולל ארחות תורה" loading="lazy"><img class="ycard__logo" src="assets/logos/kollelim-clear.png" alt=""></div>
+            <div class="ycard__body"><span class="ycard__meta">כעשרים כוללים ברחבי הארץ</span><h3>רשת הכוללים</h3></div>
+          </a>
+        </div>
+        <div class="net__bar" aria-hidden="true"><i id="netBar"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HISTORY: pinned timeline -->
+  <section class="hist g-olive tex dark" id="history">
+    <div class="hist__pin" style="--n:6">
+      <div class="hist__stage">
+        <div>
+          <div class="s-head">
+            <svg class="orn reveal" data-orn viewBox="0 0 360 64" aria-hidden="true"></svg>
+            <h2 class="reveal">מגרעין קטן<br><span class="gold">לרשת של תורה</span></h2>
+          </div>
+          <div class="hist__list" id="histList">
+            <span class="hist__line" aria-hidden="true"><i id="histLine"></i></span>
+            <div class="step"><div class="step__y">תשנ״ח<small>1998</small></div><p>מרן הרב שטיינמן מייסד את הישיבה בבני ברק, במבנה ארעי ברחוב הרב כהנמן, ומעמיד בראשה את תלמידיו.</p></div>
+            <div class="step"><div class="step__y">תש״ע<small>2010</small></div><p>נפתח סניף הישיבה באשדוד, לבחורים מבני עדות המזרח.</p></div>
+            <div class="step"><div class="step__y">תשע״א - תשע״ב<small>2011 - 2012</small></div><p>רנה של תורה בכרמיאל, ותורת חסד באלעד, על שם הישיבה בבריסק שבה למד מרן בצעירותו.</p></div>
+            <div class="step"><div class="step__y">תשע״ג - תשע״ד<small>2013 - 2014</small></div><p>ישיבת נר זרח מצטרפת לרשת ועוברת למושב עוצם, ונפתחת ישיבת תורה בתפארתה.</p></div>
+            <div class="step"><div class="step__y">תשע״ו - תשע״ח<small>2016 - 2017</small></div><p>אמרי משה בירושלים, על שם חיבורו של רבו של מרן. בשבעה לפטירתו מונחת אבן הפינה לקריית ״אילת השחר״.</p></div>
+            <div class="step"><div class="step__y">תשפ״ב והלאה<small>2022</small></div><p>נפתחת רוממות התורה בבני ברק. היום לומדים ברשת 4,500 בחורים וכ-1,300 אברכים.</p></div>
+          </div>
+          <div class="hist__hint">גללו כדי לעבור בין התחנות</div>
+        </div>
+        <div class="hist__visual archf" aria-hidden="true">
+          <svg class="star" viewBox="0 0 24 24"><path fill="url(#gm)" d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg>
+          <div class="arch" id="histImgs">
+            <img class="on" src="assets/img/rav-steinman.jpg" alt="" loading="lazy">
+            <img src="assets/img/gallery-08.jpg" alt="" loading="lazy">
+            <img src="assets/img/rinah-shel-torah.jpg" alt="" loading="lazy">
+            <img src="assets/img/ner-zerach.jpg" alt="" loading="lazy">
+            <img src="assets/img/gallery-14.jpg" alt="" loading="lazy">
+            <img src="assets/img/romemut-hatorah.jpg" alt="" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DONATE: sponsor learning across the whole network -->
+  <section class="g-parch tex wrap" id="donate">
+    <div class="s-head s-head--c">
+      <svg class="orn orn--c reveal" data-orn viewBox="0 0 360 64" aria-hidden="true"></svg>
+      <h2 class="reveal">החזיקו את <span class="gold">לימוד התורה</span></h2>
+      <p class="pasuk reveal reveal-d1">עֵץ חַיִּים הִיא לַמַּחֲזִיקִים בָּהּ<cite>משלי ג, יח</cite></p>
+      <p class="reveal reveal-d1">כל החזקה היא בכל הרשת כולה: שעה אחת שלכם היא שעה של 4,500 בחורים הלומדים יחד, בכל ישיבות ארחות תורה.</p>
+    </div>
+    <div class="tiers">
+      <div class="tier tier--1 reveal">
+        <div class="tier__arch">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2"/></svg>
+          <div class="tier__name">שעת לימוד</div>
+          <div class="tier__eq"><b>4,500</b>שעות לימוד בכל הרשת</div>
+          <div class="tier__sum">$1,800</div>
+          <a class="btn btn--gold" href="#contact">להחזקת שעה</a>
+        </div>
+      </div>
+      <div class="tier tier--2 reveal reveal-d1">
+        <div class="tier__arch">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          <div class="tier__name">יום לימוד</div>
+          <div class="tier__eq"><b>45,000</b>שעות לימוד בכל הרשת</div>
+          <div class="tier__sum">$18,000</div>
+          <a class="btn btn--gold" href="#contact">להחזקת יום</a>
+        </div>
+      </div>
+      <div class="tier tier--3 reveal reveal-d2">
+        <div class="tier__arch">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v14H4zM4 10h16M8 3v4M16 3v4"/></svg>
+          <div class="tier__name">שבוע לימוד</div>
+          <div class="tier__eq"><b>270,000</b>שעות לימוד בכל הרשת</div>
+          <div class="tier__sum">$90,000</div>
+          <a class="btn btn--gold" href="#contact">להחזקת שבוע</a>
+        </div>
+      </div>
+      <div class="tier tier--4 reveal reveal-d3">
+        <div class="tier__arch">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4 6.5 6.5 0 0 0 20 14.5z"/></svg>
+          <div class="tier__name">חודש לימוד</div>
+          <div class="tier__eq"><b>1,170,000</b>שעות לימוד בכל הרשת</div>
+          <div class="tier__sum">$360,000</div>
+          <a class="btn btn--gold" href="#contact">להחזקת חודש</a>
+        </div>
+      </div>
+    </div>
+    <div class="tiers__more reveal">
+      <span>מעדיפים סכום אחר, הנצחה או תרומה לישיבה מסוימת?</span>
+      <a class="btn btn--ghost" href="#contact">לתרומה כללית <span class="arrow">←</span></a>
+    </div>
+  </section>
+
+  <!-- GALLERY BAND -->
+  <section class="band g-parch tex" aria-label="מהיכלי הרשת">
+    <div class="band__rows" id="bandRows"></div>
+    <div class="band__label reveal">
+      <h2>קול התורה <span class="gold">אינו פוסק</span></h2>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="g-navy tex dark wrap" id="contact">
+    <div class="contact__grid">
+      <div>
+        <div class="s-head" style="margin-bottom:0">
+          <svg class="orn reveal" data-orn viewBox="0 0 360 64" aria-hidden="true"></svg>
+          <h2 class="reveal">צרו קשר <span class="gold">עם המשרד</span></h2>
+          <p class="reveal reveal-d1">לתרומות, הנצחות והחזקת לימוד, או לכל שאלה על הרשת. נשמח לחזור אליכם.</p>
+        </div>
+        <div class="cinfo reveal reveal-d2">
+          <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11zM12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/></svg><span><b>משרד הישיבה</b>רחוב שלמה המלך, בני ברק</span></div>
+          <a href="tel:+97230000000"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg><span><b>טלפון</b>03-000-0000</span></a>
+          <a href="mailto:office@orchottora.org"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3zM3 6l9 7 9-7"/></svg><span><b>דוא״ל</b>office@orchottora.org</span></a>
+        </div>
+      </div>
+      <form class="form reveal" id="form" novalidate>
+        <div class="field"><label for="f-name">שם מלא</label><input id="f-name" name="name" autocomplete="name" placeholder="איך לפנות אליכם"></div>
+        <div class="field"><label for="f-phone">טלפון</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="מספר לחזרה"></div>
+        <div class="field"><label for="f-mail">דוא״ל</label><input id="f-mail" name="email" type="email" autocomplete="email" placeholder="name@mail.com" dir="ltr" style="text-align:right"></div>
+        <div class="field">
+          <span class="field__lbl" id="dd-lbl" style="font-size:var(--fs-note);letter-spacing:.06em;color:var(--cream-70)">נושא הפנייה</span>
+          <div class="dd" id="dd">
+            <button class="dd__btn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="dd-lbl dd-val"><span id="dd-val">החזקת לימוד</span></button>
+            <ul class="dd__list" role="listbox" aria-labelledby="dd-lbl" tabindex="-1">
+              <li role="option" aria-selected="true">החזקת לימוד</li><li role="option">הנצחה</li><li role="option">תרומה לישיבה מסוימת</li><li role="option">שאלה כללית</li>
+            </ul>
+            <input type="hidden" name="topic" value="החזקת לימוד">
+          </div>
+        </div>
+        <div class="field field--full"><label for="f-msg">הודעה</label><textarea id="f-msg" name="message" placeholder="ספרו לנו במה נוכל לעזור"></textarea></div>
+        <button class="btn btn--gold" type="submit">שליחת הפנייה <span class="arrow">←</span></button>
+        <p class="form__note" id="formNote">נחזור אליכם בהקדם. הפרטים נשמרים במשרד הישיבה בלבד.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- all institutions -->
+  <section class="logos g-parch tex wrap" aria-label="מוסדות הרשת">
+    <div class="logos__row">
+      <img src="assets/logos/orchot-torah.png" alt="ישיבת ארחות תורה" loading="lazy" data-photo="assets/img/orchot-torah.jpg" data-place="בני ברק">
+      <img src="assets/logos/rinah-shel-torah.png" alt="ישיבת רנה של תורה" loading="lazy" data-photo="assets/img/rinah-shel-torah.jpg" data-place="כרמיאל">
+      <img src="assets/logos/ner-zerach.png" alt="ישיבת נר זרח" loading="lazy" data-photo="assets/img/ner-zerach.jpg" data-place="מושב עוצם">
+      <img src="assets/logos/torah-btifartah.png" alt="ישיבת תורה בתפארתה" loading="lazy" data-photo="assets/img/torah-btifartah.jpg" data-place="ישיבה גדולה">
+      <img src="assets/logos/torat-chesed.png" alt="ישיבת תורת חסד" loading="lazy" data-photo="assets/img/torat-chesed.jpg" data-place="אלעד">
+      <img src="assets/logos/imrei-moshe.png" alt="ישיבת אמרי משה" loading="lazy" data-place="ירושלים">
+      <img src="assets/logos/romemut-hatorah.png" alt="ישיבת רוממות התורה" loading="lazy" data-photo="assets/img/romemut-hatorah.jpg" data-place="בני ברק">
+      <img src="assets/logos/mosdot.png" alt="מוסדות ארחות תורה" loading="lazy" data-photo="assets/video/hero-hall.jpg" data-place="כל הרשת">
+      <img src="assets/logos/kollelim-clear.png" alt="רשת הכוללים ארחות תורה" loading="lazy" data-photo="assets/img/gallery-04.jpg" data-place="כעשרים כוללים">
+    </div>
+  </section>
+  <div class="lprev" id="lprev" aria-hidden="true">
+    <svg class="star" viewBox="0 0 24 24"><path fill="url(#gm)" d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg>
+    <div class="arch"><img alt=""></div>
+    <div class="plate"><b></b><span></span></div>
+  </div>
+</main>
+
+<footer class="ftr dark">
+  <div class="ftr__top">
+    <div class="ftr__brand">
+      <img src="assets/logos/mosdot-light.png" alt="מוסדות ארחות תורה">
+      <p>רשת הישיבות שייסד מרן הרב אהרן יהודה לייב שטיינמן זצ״ל. תורה יומם ולילה, בכל רחבי הארץ.</p>
+    </div>
+    <div><h4>הרשת</h4><ul><li><a href="#about">אודות הרשת</a></li><li><a href="#founder">המייסד</a></li><li><a href="#founder">ראשי הישיבה</a></li><li><a href="#history">היסטוריה</a></li><li><a href="#numbers">במספרים</a></li></ul></div>
+    <div><h4>הישיבות</h4><ul><li><a href="#network">ארחות תורה</a></li><li><a href="#network">רנה של תורה</a></li><li><a href="#network">נר זרח</a></li><li><a href="#network">תורה בתפארתה</a></li><li><a href="#network">תורת חסד</a></li><li><a href="#network">אמרי משה</a></li><li><a href="#network">רוממות התורה</a></li></ul></div>
+    <div><h4>תרומות</h4><ul><li><a href="#donate">שעת לימוד</a></li><li><a href="#donate">יום לימוד</a></li><li><a href="#donate">שבוע לימוד</a></li><li><a href="#donate">חודש לימוד</a></li><li><a href="#contact">תרומה כללית</a></li></ul></div>
+  </div>
+  <div class="ornline" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path fill="url(#gm)" d="M12 0l2.6 9.4L24 12l-9.4 2.6L12 24l-2.6-9.4L0 12l9.4-2.6z"/></svg></div>
+  <div class="ftr__bottom">
+    <span><a href="#">תקנון</a> · <a href="#">מדיניות פרטיות</a> · <a href="#">הצהרת נגישות</a></span>
+    <span>בניית אתרים ואפליקציות · לייזר פרוליך</span>
+  </div>
+</footer>
+
+<button class="kol" id="kol" type="button" aria-pressed="false" aria-label="להתחבר לקול התורה: השמעת קול הלימוד מהיכל הישיבה">
+  <span class="kol__icon" aria-hidden="true">
+    <svg class="kol__play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg>
+    <svg class="kol__stop" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1.5"/></svg>
+  </span>
+  <span class="kol__txt">להתחבר לקול התורה</span>
+  <span class="kol__bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+</button>
+
+<a class="wa" href="https://wa.me/972500000000" aria-label="שליחת הודעת וואטסאפ למשרד">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M20.5 3.5A11 11 0 0 0 3.3 17.2L2 22l4.9-1.3A11 11 0 0 0 20.5 3.5Zm-8.5 17a9 9 0 0 1-4.6-1.3l-.3-.2-2.9.8.8-2.8-.2-.3A9 9 0 1 1 12 20.5Zm5-6.7c-.3-.1-1.6-.8-1.9-.9-.2-.1-.4-.1-.6.1l-.9 1.1c-.2.2-.3.2-.6.1a7.4 7.4 0 0 1-3.6-3.2c-.3-.5.3-.4.8-1.4.1-.2 0-.3 0-.5l-.9-2c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.8 11.8 0 0 0 4.6 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.5-.3Z"/></svg>
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
