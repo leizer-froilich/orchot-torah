@@ -13,14 +13,16 @@
   /* ---------- gold title ornament: one drawing, injected into every [data-orn] ---------- */
   const side = '<path d="M232 40h52"/><path d="M284 40c14 0 22-6 22-13 0-6-6-9-10-6.5s-2.5 8 2.5 7.5"/>' +
                '<path d="M284 40c14 0 22 6 22 13 0 6-6 9-10 6.5s-2.5-8 2.5-7.5"/><path d="M312 40h20"/>';
+  // the centre is the logo's own frame: its four corner pieces, traced from the logo, with a star where the name sits
+  const FRAME = 'M180 8.9L164.7 2.3L158.8 8.1V18.1H165V3.7L179.6 9.7zM180 8.9l.2.8L194.7 3.7V18.1H201.2V8.1L195.2 2.3z' +
+                'M158.8 43.9V49.7L164.8 55.7L179.9 61.7V60.8L165 54.1V43.9zM201.2 43.9H194.8V54.1L180 60.8V61.7L195.2 55.5L201.2 49.7z';
   const ORN =
     '<defs><linearGradient id="gmo" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="360" y2="64">' +
     '<stop offset="0" stop-color="#8C6A32"/><stop offset=".3" stop-color="#E9CF8E"/><stop offset=".5" stop-color="#F6E4AE"/>' +
     '<stop offset=".7" stop-color="#C29A5B"/><stop offset="1" stop-color="#8C6A32"/></linearGradient></defs>' +
     '<g fill="none" stroke="url(#gmo)" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">' +
-    '<path d="M160 60V36l20-12 20 12v24"/><path d="M171 60V48a9 9 0 0 1 18 0v12"/><path d="M146 60h68"/>' +
     side + '<g transform="translate(360 0) scale(-1 1)">' + side + '</g></g>' +
-    '<g fill="url(#gmo)"><path class="f" d="M180 0l2.4 7.6L190 10l-7.6 2.4L180 20l-2.4-7.6L170 10l7.6-2.4z"/>' +
+    '<g fill="url(#gmo)"><path class="f" d="' + FRAME + '"/><path class="f" d="M180 22l2.2 6.8L189 31l-6.8 2.2L180 40l-2.2-6.8L171 31l6.8-2.2z"/>' +
     '<path class="f" d="M220 34l6 6-6 6-6-6z"/><path class="f" d="M140 34l6 6-6 6-6-6z"/>' +
     '<circle class="f" cx="344" cy="40" r="2.6"/><circle class="f" cx="16" cy="40" r="2.6"/></g>';
   $$('[data-orn]').forEach(svg => {
@@ -71,22 +73,20 @@
   /* ---------- preloader: the logo breaks into pieces, then rebuilds itself as the site loads ---------- */
   const video = $('#heroVideo');
   const pctEl = $('#pct'), bar = $('.pre__bar');
-  // the logo's own parts: frame halves, the three Hebrew lines, the English line. They open apart, then close in this DOM order.
+  // the logo's own parts appear in place one after another, from the top of the logo to the bottom, each wiping down its own height
   const parts = $$('#preLogo img'), preLogo = $('#preLogo');
-  const OFF = { 'frame-bl': [-15, 8, -5], 'frame-br': [15, 8, 5], 'frame-tl': [-15, -9, 5], 'frame-tr': [15, -9, -5],
-                w3: [-8, 2, 0], w2: [8, -1, 0], w1: [0, -9, 0], en: [0, 9, 0] };   // [x %, y %, deg] when fully open
+  const BUILD = { 'frame-tl': [0, 28, 0], 'frame-tr': [0, 28, .04], w1: [17, 26, .18], w2: [29, 48, .32], w3: [48, 68, .46],
+                  en: [71, 84, .6], 'frame-bl': [69, 100, .72], 'frame-br': [69, 100, .76] };   // [top %, bottom %, start of its turn]
   const smooth = t => t * t * (3 - 2 * t);
-  function drawParts(now, build) {
-    const el = now - t0, fadeIn = clamp(el / 500), open = RM ? 0 : smooth(clamp((el - 650) / 1100));
-    parts.forEach((im, i) => {
-      const [dx, dy, r] = OFF[im.dataset.p], q = smooth(clamp((build * 1.3 - i * .1) / .32)), k = open * (1 - q);
-      im.style.transform = `translate(${(dx * k).toFixed(2)}%,${(dy * k).toFixed(2)}%) rotate(${(r * k).toFixed(2)}deg)`;
-      im.style.opacity = (fadeIn * (1 - .7 * k)).toFixed(3);
-      im.style.filter = k > .01 ? `blur(${(k * 2.2).toFixed(2)}px)` : 'none';
+  function drawParts(build) {
+    parts.forEach(im => {
+      const [y0, y1, t] = BUILD[im.dataset.p], q = RM ? 1 : smooth(clamp((build - t) / .24));
+      im.style.clipPath = `inset(0 0 ${(100 - (y0 + (y1 - y0) * q)).toFixed(2)}% 0)`;
+      im.style.opacity = q > 0 ? 1 : 0;
     });
   }
   function settle() {   // whole again: a soft gold glow, then open the site
-    drawParts(performance.now(), 1); preLogo.classList.add('is-whole');
+    drawParts(1); preLogo.classList.add('is-whole');
     setTimeout(intro, RM ? 0 : 650);
   }
   const tasks = [
@@ -104,7 +104,7 @@
     if (realP === 1 && timeP === 1 && shown > .995) shown = 1;
     pctEl.textContent = Math.round(shown * 100);
     bar.style.setProperty('--p', shown);
-    drawParts(now, clamp((shown - .5) / .5));
+    drawParts(shown);
     if (shown < 1) requestAnimationFrame(tick); else settle();
   })(t0);
 
@@ -134,7 +134,7 @@
   const fitRav = () => ravFig.style.setProperty('--tb', Math.round(heroText.offsetHeight + parseFloat(getComputedStyle(heroIn).paddingBottom) + 10) + 'px');
   fitRav(); addEventListener('resize', fitRav); document.fonts && document.fonts.ready.then(fitRav);
 
-  /* ---------- hero: the hall video drifts with the mouse, Maran a touch the other way ---------- */
+  /* ---------- hero: the hall video drifts with the mouse; Maran stays still ---------- */
   (function follow() {
     if (RM || matchMedia('(hover: none)').matches) return;
     let tx = 0, ty = 0, x = 0, y = 0, on = false;
@@ -310,7 +310,7 @@
   /* ---------- gallery band: two seamless rows (two identical groups each) ---------- */
   const imgs = Array.from({ length: 18 }, (_, i) => i + 1).filter(n => ![5].includes(n) && n <= 18).map(n => `assets/img/gallery-${String(n).padStart(2, '0')}.jpg`);
   const rowA = imgs.slice(0, 9), rowB = imgs.slice(9);
-  const group = list => `<div class="mq__g">${list.map(s => `<img src="${s}" alt="" loading="lazy">`).join('')}</div>`;
+  const group = list => `<div class="mq__g">${list.map(s => `<img src="${s}" alt="" decoding="async">`).join('')}</div>`;
   $('#bandRows').innerHTML = `<div class="mq mq--a">${group(rowA)}${group(rowA)}</div><div class="mq mq--b">${group(rowB)}${group(rowB)}</div>`;
 
   /* ---------- custom dropdown (no browser-default select) ---------- */

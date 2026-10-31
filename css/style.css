@@ -185,7 +185,7 @@ h2 .gold,.hero h1 .gold{background-image:linear-gradient(to left,#7E5E2A 0%,#C29
    Sized so his beard ends where the title block starts (beard ≈ 67% of the image height). */
 .hero__rav{--rw:min(96vw,calc((100svh - var(--hd) - var(--tb)) * 1.99));--tb:262px;position:absolute;margin:0;z-index:1;
   top:calc(var(--hd) + 6px);left:50%;width:var(--rw);margin-left:calc(var(--rw) / -2)}
-.hero__float{position:relative;animation:float 7s ease-in-out infinite;translate:calc(var(--mx,0) * -10px) calc(var(--my,0) * -6px)}
+.hero__float{position:relative;animation:float 7s ease-in-out infinite}
 .hero__float img{width:100%;height:auto;filter:sepia(.12) contrast(1.05) drop-shadow(0 30px 60px rgba(0,0,0,.45));
   -webkit-mask-image:linear-gradient(to bottom,#000 58%,rgba(0,0,0,.6) 76%,transparent 95%);mask-image:linear-gradient(to bottom,#000 58%,rgba(0,0,0,.6) 76%,transparent 95%)}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
@@ -203,12 +203,6 @@ h2 .gold,.hero h1 .gold{background-image:linear-gradient(to left,#7E5E2A 0%,#C29
 .hero__sub{font-size:clamp(1.0625rem,1.3vw,1.375rem);font-weight:var(--w-light);color:var(--cream-70);max-width:64ch;line-height:1.5}
 .hero__sub b{font-weight:var(--w-bold);color:var(--parch)}
 .hero .ctas{margin-top:8px}
-.hero__frame{position:absolute;z-index:4;inset:auto var(--margin) 28px;display:flex;justify-content:left;align-items:end;
-  font-size:var(--fs-note);letter-spacing:.14em;color:var(--cream-70);pointer-events:none}
-.scrollhint{display:flex;align-items:center;gap:10px}
-.scrollhint i{display:block;width:1px;height:42px;background:linear-gradient(var(--gold),transparent);position:relative;overflow:hidden}
-.scrollhint i::after{content:"";position:absolute;inset:0;background:var(--gold-hi);animation:drip 2.2s var(--ease) infinite}
-@keyframes drip{from{transform:translateY(-100%)}to{transform:translateY(100%)}}
 .hero__sketch{z-index:6;pointer-events:none;transition:opacity 1.4s var(--ease)}
 .hero__sketch path{fill:none;stroke:#9C7A42;stroke-width:1.2;stroke-linecap:round;opacity:.6}
 .hero__ink{z-index:5;pointer-events:none}
@@ -322,13 +316,14 @@ h2 .gold,.hero h1 .gold{background-image:linear-gradient(to left,#7E5E2A 0%,#C29
 /* ---------- gallery band: two tilted marquees + label ---------- */
 #donate{padding-bottom:clamp(40px,4vw,64px)}
 .band{padding-block:clamp(24px,3vw,48px) clamp(56px,6vw,96px);position:relative;overflow:hidden}
-.mq{display:flex;width:max-content;gap:16px;padding-block:8px}
-.mq__g{display:flex;gap:16px}
+/* always laid out left to right so the loop is the same in both languages; each group carries its trailing gap so -50% lands exactly */
+.mq{display:flex;width:max-content;padding-block:8px;direction:ltr}
+.mq__g{display:flex;gap:16px;padding-right:16px}
 .mq img{height:clamp(150px,15vw,230px);width:auto;aspect-ratio:3/2;object-fit:cover;border-radius:999px 999px 0 0;filter:sepia(.2) saturate(.85)}
-.mq--a{animation:mqL 70s linear infinite;transform-origin:center}
+.mq--a{animation:mqL 70s linear infinite}
 .mq--b{animation:mqR 80s linear infinite}
-.band__rows{transform:rotate(-3deg) scale(1.06);display:grid;gap:14px}
-@keyframes mqL{to{transform:translateX(50%)}} @keyframes mqR{from{transform:translateX(50%)}to{transform:translateX(0)}}
+.band__rows{transform:rotate(-3deg) scale(1.06);display:grid;gap:14px;direction:ltr}
+@keyframes mqL{from{transform:translateX(-50%)}to{transform:translateX(0)}} @keyframes mqR{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .band__label{position:absolute;inset:0;margin:auto;height:max-content;width:max-content;max-width:calc(100% - 2*var(--margin));z-index:2;
   background:var(--parch);padding:clamp(18px,2vw,30px) clamp(30px,4vw,64px);text-align:center;box-shadow:0 30px 60px -30px rgba(24,46,66,.6)}
 .band__label::before{content:"";position:absolute;inset:8px;border:1px solid var(--gold);pointer-events:none}
@@ -482,7 +477,6 @@ h2 .gold,.hero h1 .gold{background-image:linear-gradient(to left,#7E5E2A 0%,#C29
   .hero__text{align-self:end}
   .hero h1{font-size:clamp(2.6rem,11.5vw,3.6rem)}
   .hero .ctas{display:grid;grid-auto-flow:row;width:100%}
-  .hero__frame{display:none}
   .about__grid,.founder__grid,.contact__grid{grid-template-columns:1fr}
   .about__visual{order:-1;width:78%}
   .founder__visual{width:82%}
