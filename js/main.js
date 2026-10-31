@@ -308,7 +308,7 @@
   onScroll();
 
   /* ---------- gallery band: two seamless rows (two identical groups each) ---------- */
-  const imgs = Array.from({ length: 18 }, (_, i) => i + 1).filter(n => ![5].includes(n) && n <= 18).map(n => `assets/img/gallery-${String(n).padStart(2, '0')}.jpg`);
+  const imgs = [...Array.from({ length: 18 }, (_, i) => i + 1).filter(n => n !== 5), 22, 23].map(n => `assets/img/gallery-${String(n).padStart(2, '0')}.jpg`);
   const rowA = imgs.slice(0, 9), rowB = imgs.slice(9);
   const group = list => `<div class="mq__g">${list.map(s => `<img src="${s}" alt="" decoding="async">`).join('')}</div>`;
   $('#bandRows').innerHTML = `<div class="mq mq--a">${group(rowA)}${group(rowA)}</div><div class="mq mq--b">${group(rowB)}${group(rowB)}</div>`;
