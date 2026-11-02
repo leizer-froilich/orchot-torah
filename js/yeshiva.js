@@ -61,11 +61,20 @@
     });
   }
 
+  /* ---------- gallery: tilted endless rows; built when near the screen, each row starting at a different photo ---------- */
+  const wg = $('#wg'), imgs = wg.dataset.imgs.split('|'), ROWS = 8;
+  new IntersectionObserver(([e], ob) => {
+    if (!e.isIntersecting) return; ob.disconnect();
+    const rot = n => imgs.map((_, i) => imgs[(i + n) % imgs.length]);
+    const cell = s => `<button class="wg__i" type="button" data-i="${imgs.indexOf(s)}" aria-label="הגדלת תמונה ${imgs.indexOf(s) + 1}"><img src="${s}" alt="" decoding="async"></button>`;
+    wg.innerHTML = Array.from({ length: ROWS }, (_, r) => { const g = `<div class="wg__g">${rot(r * 3).map(cell).join('')}</div>`; return `<div class="wg__row" style="--t:${84 + r * 13}s">${g}${g}${g}${g}</div>`; }).join('');
+  }, { rootMargin: '700px' }).observe(wg);
+
   /* ---------- gallery lightbox ---------- */
-  const lb = $('#lb'), big = lb.querySelector('img'), items = $$('.gl__i'); let cur = 0;
-  const open = i => { cur = (i + items.length) % items.length; big.src = items[cur].dataset.full; lb.classList.add('on'); lb.setAttribute('aria-hidden', false); };
+  const lb = $('#lb'), big = lb.querySelector('img'); let cur = 0;
+  const open = i => { cur = (i + imgs.length) % imgs.length; big.src = imgs[cur]; lb.classList.add('on'); lb.setAttribute('aria-hidden', false); };
   const close = () => { lb.classList.remove('on'); lb.setAttribute('aria-hidden', true); };
-  items.forEach((b, i) => b.addEventListener('click', () => open(i)));
+  wg.addEventListener('click', e => { const b = e.target.closest('.wg__i'); if (b) open(+b.dataset.i); });
   lb.querySelector('.lb__x').addEventListener('click', close);
   lb.querySelector('.lb__p').addEventListener('click', () => open(cur - 1));
   lb.querySelector('.lb__f').addEventListener('click', () => open(cur + 1));
