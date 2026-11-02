@@ -101,6 +101,60 @@
     el.addEventListener('pointerenter', () => on(true)); el.addEventListener('pointerleave', () => on(false));
   });
 
+  /* ---------- history: each photo is sketched in pencil strokes on paper, then the ink spreads and reveals it ---------- */
+  const lineFill = $('#tlLine'), tlList = $('#tlList');
+  if (tlList) {
+    const stops = $$('.ts'), tlN = $('#tlN'), tlY = $('#tlY');
+    const tio = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      stops.forEach(s => s.classList.toggle('on', stops.indexOf(s) <= stops.indexOf(e.target)));
+      tlN.textContent = e.target.dataset.n; tlY.textContent = e.target.dataset.year;
+    }), { rootMargin: '-45% 0px -45% 0px' });
+    stops.forEach(s => tio.observe(s));
+    const fill = () => { const r = tlList.getBoundingClientRect(); lineFill.style.setProperty('--p', clamp((innerHeight * .55 - r.top) / r.height)); };
+    addEventListener('scroll', fill, { passive: true }); addEventListener('resize', fill); fill();
+    $$('[data-sketch]').forEach(pic => {
+      const cv = pic.querySelector('canvas');
+      if (RM) { cv.remove(); return; }
+      const W = cv.width = 1000, H = cv.height = 667, c = cv.getContext('2d'), sk = new Image();
+      c.fillStyle = '#EFE3CC'; c.fillRect(0, 0, W, H); sk.src = pic.dataset.sketch;
+      const run = () => {
+        const t0 = performance.now(), DRAW = 1500; let last = 0;
+        (function draw(now) {                                // pencil strokes laid across the page, from the top corner down
+          const p = clamp((now - t0) / DRAW), band = (W + H) * p;
+          for (; last < band; last += 7) {
+            c.save(); c.beginPath();
+            const j = Math.random() * 14 - 7, w = 16 + Math.random() * 22, x = W - last + j;
+            c.moveTo(x, 0); c.lineTo(x + w, 0); c.lineTo(x + w + H * .9, H); c.lineTo(x + H * .9, H); c.closePath(); c.clip();
+            c.drawImage(sk, 0, 0, W, H); c.restore();
+          }
+          if (p < 1) return requestAnimationFrame(draw);
+          c.drawImage(sk, 0, 0, W, H); setTimeout(reveal, 420);
+        })(t0);
+      };
+      function reveal() {
+        c.globalCompositeOperation = 'destination-out';
+        const seeds = [[.5, .5, 0, 1200, .62], [.2, .25, 140, 1100, .42], [.82, .3, 200, 1100, .42], [.18, .8, 280, 1050, .42], [.84, .78, 320, 1050, .42]]
+          .map(([x, y, d, dur, s]) => ({ x, y, d, dur, s, ph: [Math.random() * 6, Math.random() * 6, Math.random() * 6] }));
+        const R = Math.hypot(W, H), t0 = performance.now();
+        requestAnimationFrame(function fr(now) {
+          const t = now - t0; let alive = false;
+          for (const s of seeds) {
+            const p = clamp((t - s.d) / s.dur); if (p < 1) alive = true; if (p <= 0) continue;
+            const r = easeOut(p) * R * s.s, cx = s.x * W, cy = s.y * H; c.beginPath();
+            for (let i = 0; i <= 72; i++) { const a = i / 72 * Math.PI * 2, rr = r * (1 + .16 * Math.sin(a * 3 + s.ph[0] + t * .0012) + .1 * Math.sin(a * 7 + s.ph[1]) + .06 * Math.sin(a * 13 + s.ph[2])); i ? c.lineTo(cx + Math.cos(a) * rr, cy + Math.sin(a) * rr) : c.moveTo(cx + Math.cos(a) * rr, cy + Math.sin(a) * rr); }
+            const g = c.createRadialGradient(cx, cy, r * .55, cx, cy, r * 1.2); g.addColorStop(0, 'rgba(0,0,0,1)'); g.addColorStop(1, 'rgba(0,0,0,0)'); c.fillStyle = g; c.fill();
+          }
+          if (alive) requestAnimationFrame(fr); else cv.remove();
+        });
+      }
+      new IntersectionObserver(([e], ob) => {
+        if (!e.isIntersecting) return; ob.disconnect();
+        sk.complete && sk.naturalWidth ? run() : (sk.onload = run);
+      }, { threshold: .45 }).observe(pic);
+    });
+  }
+
   /* ---------- gold sparks in the buttons ---------- */
   (function btnSparks() {
     if (RM) return;
