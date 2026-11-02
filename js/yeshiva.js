@@ -61,8 +61,10 @@
     });
   }
 
+  const wg = $('#wg');
+  if (wg) {
   /* ---------- gallery: tilted endless rows; built when near the screen, each row starting at a different photo ---------- */
-  const wg = $('#wg'), imgs = wg.dataset.imgs.split('|'), ROWS = 8;
+  const imgs = wg.dataset.imgs.split('|'), ROWS = 8;
   new IntersectionObserver(([e], ob) => {
     if (!e.isIntersecting) return; ob.disconnect();
     const rot = n => imgs.map((_, i) => imgs[(i + n) % imgs.length]);
@@ -83,6 +85,20 @@
     if (e.key === 'Escape') { close(); setMenu(false); }
     if (!lb.classList.contains('on')) return;
     if (e.key === 'ArrowLeft') open(cur + 1); if (e.key === 'ArrowRight') open(cur - 1);
+  });
+
+  }
+
+  /* ---------- network page: numbers count up, map and list light each other ---------- */
+  const cio = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return; cio.unobserve(e.target);
+    const el = e.target, to = +el.dataset.count, suf = el.dataset.suffix || '', t0 = performance.now(), D = RM ? 0 : 2000;
+    (function f(now) { const p = D ? clamp((now - t0) / D) : 1; el.textContent = Math.round(easeOut(p) * to).toLocaleString('en-US') + (p === 1 ? suf : ''); if (p < 1) requestAnimationFrame(f); })(t0);
+  }), { threshold: .5 });
+  $$('[data-count]').forEach(el => cio.observe(el));
+  $$('[data-city]').forEach(el => {
+    const peers = () => $$(`[data-city="${el.dataset.city}"]`), on = v => peers().forEach(p => p.classList.toggle('hot', v));
+    el.addEventListener('pointerenter', () => on(true)); el.addEventListener('pointerleave', () => on(false));
   });
 
   /* ---------- gold sparks in the buttons ---------- */
