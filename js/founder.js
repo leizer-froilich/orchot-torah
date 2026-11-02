@@ -20,7 +20,7 @@
   $$('[data-orn]').forEach(s => { s.innerHTML = ORN; });
 
   /* ---------- titles fill in from a gold contour, as on the homepage ---------- */
-  $$('.st h2').forEach(h => {
+  $$('.st h2, #contact h2').forEach(h => {
     [...h.childNodes].forEach(n => { if (n.nodeType === 3 && n.textContent.trim()) { const s = document.createElement('span'); s.className = 'tf'; s.textContent = n.textContent; n.replaceWith(s); } });
     h.querySelectorAll('.tf,.gold').forEach((s, i) => s.style.setProperty('--d', (.5 + i * .35) + 's'));
   });
@@ -71,7 +71,7 @@
   let cur = 0, lastCur = 0;
   rail.innerHTML = '<i></i>' + slides.map((s, i) => `<button type="button" aria-label="${s.dataset.label}"><span>${s.dataset.label}</span></button>`).join('');
   const dots = [...rail.querySelectorAll('button')], fill = rail.querySelector('i');
-  dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
+  dots.forEach((d, i) => d.addEventListener('click', () => go(i, 'auto')));
   function open(st, i) {
     if (st.classList.contains('is-open')) return;
     spread(st, (i >= lastCur) === RTL ? .08 : .92);        // the paper spreads from the side you came in from (RTL: next arrives from the left)
@@ -98,6 +98,7 @@
   addEventListener('keydown', e => {
     if (e.key === 'Escape') setMenu(false);
     const k = { ArrowLeft: RTL ? 1 : -1, ArrowRight: RTL ? -1 : 1, PageDown: 1, PageUp: -1, ' ': 1, Home: -99, End: 99 }[e.key];
+    if (cur === slides.length - 1 && (e.key === ' ' || e.key === 'PageDown')) return;
     if (k && !e.target.closest('a,button,input,textarea')) { e.preventDefault(); go(cur + k); }
   });
 
@@ -105,8 +106,7 @@
   let lock = 0, acc = 0;
   track.addEventListener('wheel', e => {
     if (innerWidth <= 820) return;
-    const here = slides[cur];
-    if (here.classList.contains('st--foot') && (e.deltaY > 0 || here.scrollTop > 0)) return;   // the last slide scrolls by itself
+    if (scrollY > 0 || (cur === slides.length - 1 && e.deltaY > 0)) return;   // after the last station the page scrolls down to the footer
     if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;     // a horizontal swipe is the browser's own
     e.preventDefault();
     const now = performance.now(); if (now < lock) return;
@@ -119,7 +119,11 @@
   track.addEventListener('pointerdown', e => { if (e.pointerType === 'mouse' && !e.target.closest('a,button')) down = { x: e.clientX }; });
   addEventListener('pointerup', e => { if (down) { const dx = e.clientX - down.x; if (Math.abs(dx) > 70) go(cur + ((dx > 0) === RTL ? 1 : -1)); down = null; } });
 
-  $$('a[href="#contact"]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); setMenu(false); go(slides.length - 1, 'auto'); }));
+  $$('a[href="#contact"]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); setMenu(false); scrollTo({ top: $('#contact').getBoundingClientRect().top + scrollY, behavior: 'auto' }); }));
+  const cf = $('#contact h2');
+  if (cf) new IntersectionObserver(([e], ob) => { if (e.isIntersecting) { cf.classList.add('is-filled'); ob.disconnect(); } }, { threshold: .6 }).observe(cf);
+  const past = () => document.body.classList.toggle('past', scrollY > 60);
+  addEventListener('scroll', past, { passive: true }); past();
 
   /* ---------- contact form: custom dropdown + demo submit ---------- */
   const dd = $('#dd');
