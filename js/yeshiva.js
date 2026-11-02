@@ -5,6 +5,9 @@
   const easeOut = t => 1 - Math.pow(1 - t, 3);
   const $ = s => document.querySelector(s);
   const $$ = s => [...document.querySelectorAll(s)];
+  const EN = document.documentElement.lang === 'en', RTL = document.documentElement.dir === 'rtl';
+  const T = EN ? { open: 'Open menu', close: 'Close menu', sent: 'Thank you! Your message was received, and the yeshiva office will be in touch shortly.', img: 'Enlarge photo ' }
+               : { open: 'פתיחת תפריט', close: 'סגירת תפריט', sent: 'תודה! הפנייה התקבלה, ומשרד הישיבה יחזור אליכם בהקדם.', img: 'הגדלת תמונה ' };
 
   /* ---------- gold title ornament, same drawing as the homepage ---------- */
   const FRAME = 'M180 8.9L164.7 2.3L158.8 8.1V18.1H165V3.7L179.6 9.7zM180 8.9l.2.8L194.7 3.7V18.1H201.2V8.1L195.2 2.3z' +
@@ -25,7 +28,7 @@
 
   /* ---------- menu, reveals, in-page anchors ---------- */
   const menu = $('#menu');
-  const setMenu = o => { document.body.classList.toggle('open', o); menu.setAttribute('aria-expanded', o); menu.setAttribute('aria-label', o ? 'סגירת תפריט' : 'פתיחת תפריט'); };
+  const setMenu = o => { document.body.classList.toggle('open', o); menu.setAttribute('aria-expanded', o); menu.setAttribute('aria-label', o ? T.close : T.open); };
   menu.addEventListener('click', () => setMenu(!document.body.classList.contains('open')));
   $('#drawerClose').addEventListener('click', () => setMenu(false));
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } }), { threshold: .12, rootMargin: '0px 0px -5% 0px' });
@@ -69,7 +72,7 @@
   new IntersectionObserver(([e], ob) => {
     if (!e.isIntersecting) return; ob.disconnect();
     const rot = n => imgs.map((_, i) => imgs[(i + n) % imgs.length]);
-    const cell = s => `<button class="wg__i" type="button" data-i="${imgs.indexOf(s)}" aria-label="הגדלת תמונה ${imgs.indexOf(s) + 1}"><img src="${s}" alt="" decoding="async"></button>`;
+    const cell = s => `<button class="wg__i" type="button" data-i="${imgs.indexOf(s)}" aria-label="${T.img}${imgs.indexOf(s) + 1}"><img src="${s}" alt="" decoding="async"></button>`;
     wg.innerHTML = Array.from({ length: ROWS }, (_, r) => { const g = `<div class="wg__g">${rot(r * 3).map(cell).join('')}</div>`; return `<div class="wg__row" style="--t:${84 + r * 13}s">${g}${g}${g}${g}</div>`; }).join('');
   }, { rootMargin: '700px' }).observe(wg);
 
@@ -180,7 +183,7 @@
     dd.querySelectorAll('li').forEach(li => li.addEventListener('click', () => { dd.querySelectorAll('li').forEach(x => x.setAttribute('aria-selected', x === li)); ddVal.textContent = li.textContent; ddIn.value = li.textContent; closeDD(); }));
     document.addEventListener('click', e => { if (!dd.contains(e.target)) closeDD(); });
     addEventListener('keydown', e => { if (e.key === 'Escape') closeDD(); });
-    $('#form').addEventListener('submit', e => { e.preventDefault(); $('#formNote').textContent = 'תודה! הפנייה התקבלה, ומשרד הישיבה יחזור אליכם בהקדם.'; });
+    $('#form').addEventListener('submit', e => { e.preventDefault(); $('#formNote').textContent = T.sent; });
   }
 
   /* ---------- gold sparks in the buttons ---------- */

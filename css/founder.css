@@ -109,3 +109,9 @@ body.life{overflow:hidden;background:var(--navy-deep)}
 .st--foot .ftr{padding-bottom:40px}
 .st--foot #contact{padding-top:calc(var(--hd) + 40px)}
 .st--foot .ftr::before{background:radial-gradient(circle at 12px -4px,var(--navy) 12px,transparent 12.5px) 0 0/24px 14px repeat-x}
+
+/* English: left to right, Levi capitals set smaller */
+[dir="ltr"] .rail i{transform-origin:left}
+[lang="en"] .st h2{font-size:clamp(1.6rem,min(2.6vw,4.8vh),2.9rem)}
+[lang="en"] .st--open h1{font-size:clamp(2.1rem,min(3.8vw,7.2vh),4.2rem)}
+[lang="en"] .st p{font-size:clamp(1rem,min(1.1vw,2vh),1.15rem)}

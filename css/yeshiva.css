@@ -80,9 +80,11 @@
 .track__s div.links{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 14px;font-weight:var(--w-bold)}
 .track__s .links a{color:var(--gold-lo);border-bottom:1px solid transparent;transition:border-color .3s}
 .track__s .links a:hover{border-color:currentColor}
-.mapw{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,.8fr);gap:clamp(24px,3vw,60px);align-items:start}
+.mapw{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(24px,3vw,60px);align-items:start}
 .mapw>div{position:sticky;top:calc(var(--hd) + 34px)}
-.map{width:100%;height:auto;overflow:visible}
+.map{width:100%;height:auto;max-height:calc(100vh - var(--hd) - 40px);overflow:visible}
+.lprev--sm{width:clamp(147px,12vw,190px)}
+.lprev--sm .plate{font-size:.8125rem}
 .map .land{fill:rgba(235,211,154,.08);stroke:url(#gm);stroke-width:2.2;stroke-linejoin:round}
 .map .land2{fill:none;stroke:rgba(235,211,154,.28);stroke-width:1;transform-box:fill-box;transform-origin:center;transform:scale(1.035)}
 .map .water{fill:rgba(14,28,42,.55);stroke:rgba(235,211,154,.4);stroke-width:1}
@@ -103,6 +105,7 @@
 .mlist a{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:8px 10px;color:var(--parch)}
 .mlist b{font-family:var(--font-display);font-size:1.1875rem;color:var(--gold-hi)}
 .mlist span{font-size:.8125rem;color:var(--cream-70);text-align:end}
+.mnote .btn{display:inline-flex;margin-top:12px}
 .mnote{margin-top:16px;font-size:var(--fs-note);color:var(--cream-70)}
 .lead{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,1.6vw,24px);max-width:1240px;margin-inline:auto}
 .lead div{display:grid;gap:4px;justify-items:center;text-align:center;padding:22px 16px;border:1px solid var(--gold);background:rgba(255,250,235,.45)}
@@ -162,7 +165,7 @@
   .hf{width:min(100%,300px)}.hf:nth-child(2){margin-top:0}
   .track,.mapw{grid-template-columns:minmax(0,1fr)} .track__s:not(:last-child)::after{content:"↓";position:static;transform:none;grid-row:6}
   .prins{grid-template-columns:minmax(0,1fr)} .lead{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .mapw>div{position:static}.map .pin text{font-size:32px}
+  .mapw>div{position:static}.map{max-height:none;width:min(100%,300px);justify-self:center}
   .track__s:not(:last-child)::after{display:none}
   .tl__side{display:none}
   #build{padding-block:84px}.bld{grid-template-columns:minmax(0,1fr);row-gap:64px}.bld .archf{width:min(100%,290px);margin-top:30px}
@@ -197,3 +200,13 @@ body.royal{background:var(--navy-deep)}
 
 /* the contact form sits straight on the footer on every page */
 #contact + .ftr::before{background:radial-gradient(circle at 12px -4px,var(--navy) 12px,transparent 12.5px) 0 0/24px 14px repeat-x}
+
+/* English: left to right, Levi capitals set smaller */
+[lang="en"] .yh h1{font-size:clamp(2.1rem,min(4.6vw,8.6svh),5.2rem)}
+[lang="en"] .royal h1{font-size:clamp(2.4rem,min(6.6vw,12svh),7rem)}
+[lang="en"] .wg__head h2{font-size:clamp(1.9rem,min(4.2vw,8vh),4.6rem)}
+[lang="en"] .rend h2{font-size:clamp(1.9rem,4vw,4.4rem)}
+[lang="en"] .ts h3{font-size:clamp(1.5rem,2.2vw,2.3rem)}
+[lang="en"] .stf h3,[lang="en"] .bld h3{font-size:clamp(1.1rem,1.35vw,1.4rem);letter-spacing:.02em}
+[dir="ltr"] .track__s:not(:last-child)::after{left:auto;right:calc(clamp(30px,4vw,64px) / -2);transform:translateX(50%)}
+[dir="ltr"] .lb__p{right:auto;left:20px}[dir="ltr"] .lb__f{left:auto;right:20px}

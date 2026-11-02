@@ -108,9 +108,15 @@ h2 .gold,.hero h1 .gold{background-image:linear-gradient(to left,#7E5E2A 0%,#C29
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:.6em;padding:.95em 1.7em;border-radius:999px;
   font-weight:var(--w-bold);font-size:var(--fs-body);line-height:1;white-space:nowrap;cursor:pointer;border:0;
   transition:transform .45s var(--ease),box-shadow .45s var(--ease),background-position .8s var(--ease),color .3s,border-color .3s}
-.btn--gold{background:var(--gold-metal);background-size:180% 100%;color:var(--navy-deep);box-shadow:0 10px 30px -12px rgba(140,106,50,.8)}
-.btn--gold:hover{background-position:100% 0;transform:translateY(-2px);box-shadow:0 16px 38px -14px rgba(140,106,50,.95)}
-.btn--ghost{background:transparent;border:1px solid currentColor;color:inherit}
+/* gold button: metal face on a layer, and a thin offset contour to its right, like the arch outlines around the photos */
+.btn--gold{position:relative;isolation:isolate;background:none;color:var(--navy-deep);margin-inline-end:0}
+.btn--gold::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;background:var(--gold-metal);background-size:180% 100%;box-shadow:0 10px 30px -12px rgba(140,106,50,.8);transition:background-position .8s var(--ease),box-shadow .45s var(--ease)}
+.btn--gold::after{content:"";position:absolute;inset:5px -7px -5px 7px;z-index:-2;border-radius:inherit;border:1px solid var(--gold);pointer-events:none;transition:transform .45s var(--ease)}
+.btn--gold:hover{transform:translateY(-2px)}
+.btn--gold:hover::before{background-position:100% 0;box-shadow:0 16px 38px -14px rgba(140,106,50,.95)}
+.btn--gold:hover::after{transform:translate(2px,2px)}
+.btn--ghost{background:transparent;border:1.5px solid var(--gold);color:var(--gold-lo)}
+.dark .btn--ghost,.hero .btn--ghost{color:var(--gold-hi)}
 .btn--ghost:hover{border-color:var(--gold);color:var(--gold-hi);transform:translateY(-2px)}
 .g-parch .btn--ghost:hover{color:var(--gold-lo)}
 .btn .arrow{transition:transform .45s var(--ease)}
@@ -475,6 +481,8 @@ h2 .gold,.hero h1 .gold{background-image:linear-gradient(to left,#7E5E2A 0%,#C29
 [dir="ltr"] .is-filled .tf,[dir="ltr"] .is-filled .gold,[dir="ltr"] .hero h1.is-filled .gold{background-position:0 0}
 [dir="ltr"] .btn:hover .arrow{transform:translateX(5px)}
 [dir="ltr"] .pre__bar i,[dir="ltr"] .net__bar i{transform-origin:left}
+[lang="en"] .st__year,[lang="en"] .ts__yr,[lang="en"] .tl__y{font-feature-settings:normal}
+[lang="he"]{letter-spacing:0}
 
 /* ---------- tablet / mobile ---------- */
 @media (max-width:1100px){
@@ -523,6 +531,8 @@ h2 .gold,.hero h1 .gold{background-image:linear-gradient(to left,#7E5E2A 0%,#C29
   .form{grid-template-columns:1fr;padding:24px}
   .logos__row{grid-template-columns:repeat(3,1fr);row-gap:26px}
   .ftr__top{grid-template-columns:1fr 1fr}
+  .ctas{display:grid;grid-auto-flow:row;width:100%}
+  .btn{white-space:normal;text-align:center;line-height:1.25}
   .ftr__brand{grid-column:1/-1}
   .ftr__top>div:last-child{grid-column:1/-1;text-align:center}.ftr__top>div:last-child ul{justify-items:center}
   .ftr__bottom{flex-direction:column;align-items:center;text-align:center}

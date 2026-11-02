@@ -5,6 +5,9 @@
   const easeOut = t => 1 - Math.pow(1 - t, 3);
   const $ = s => document.querySelector(s);
   const $$ = s => [...document.querySelectorAll(s)];
+  const EN = document.documentElement.lang === 'en', RTL = document.documentElement.dir === 'rtl';
+  const T = EN ? { open: 'Open menu', close: 'Close menu', sent: 'Thank you! Your message was received, and the yeshiva office will be in touch shortly.', img: 'Enlarge photo ' }
+               : { open: 'פתיחת תפריט', close: 'סגירת תפריט', sent: 'תודה! הפנייה התקבלה, ומשרד הישיבה יחזור אליכם בהקדם.', img: 'הגדלת תמונה ' };
   const track = $('#track'), slides = $$('.st'), rail = $('#rail'), prev = $('#prev'), next = $('#next');
 
   /* ---------- gold title ornament, same drawing as the homepage ---------- */
@@ -24,7 +27,7 @@
 
   /* ---------- menu ---------- */
   const menu = $('#menu');
-  const setMenu = o => { document.body.classList.toggle('open', o); menu.setAttribute('aria-expanded', o); menu.setAttribute('aria-label', o ? 'סגירת תפריט' : 'פתיחת תפריט'); };
+  const setMenu = o => { document.body.classList.toggle('open', o); menu.setAttribute('aria-expanded', o); menu.setAttribute('aria-label', o ? T.close : T.open); };
   menu.addEventListener('click', () => setMenu(!document.body.classList.contains('open')));
   $('#drawerClose').addEventListener('click', () => setMenu(false));
 
@@ -71,7 +74,7 @@
   dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
   function open(st, i) {
     if (st.classList.contains('is-open')) return;
-    spread(st, i >= lastCur ? .92 : .08);        // the paper spreads from the side you came in from (RTL: next arrives from the left)
+    spread(st, (i >= lastCur) === RTL ? .08 : .92);        // the paper spreads from the side you came in from (RTL: next arrives from the left)
     setTimeout(() => { st.classList.add('is-open'); st.querySelector('h1,h2')?.classList.add('is-filled'); }, RM ? 0 : 420);
   }
   function mark(i) {
@@ -94,7 +97,7 @@
   prev.addEventListener('click', () => go(cur - 1)); next.addEventListener('click', () => go(cur + 1));
   addEventListener('keydown', e => {
     if (e.key === 'Escape') setMenu(false);
-    const k = { ArrowLeft: 1, ArrowRight: -1, PageDown: 1, PageUp: -1, ' ': 1, Home: -99, End: 99 }[e.key];
+    const k = { ArrowLeft: RTL ? 1 : -1, ArrowRight: RTL ? -1 : 1, PageDown: 1, PageUp: -1, ' ': 1, Home: -99, End: 99 }[e.key];
     if (k && !e.target.closest('a,button,input,textarea')) { e.preventDefault(); go(cur + k); }
   });
 
@@ -114,7 +117,7 @@
   /* drag with the mouse */
   let down = null;
   track.addEventListener('pointerdown', e => { if (e.pointerType === 'mouse' && !e.target.closest('a,button')) down = { x: e.clientX }; });
-  addEventListener('pointerup', e => { if (down) { const dx = e.clientX - down.x; if (Math.abs(dx) > 70) go(cur + (dx > 0 ? 1 : -1)); down = null; } });
+  addEventListener('pointerup', e => { if (down) { const dx = e.clientX - down.x; if (Math.abs(dx) > 70) go(cur + ((dx > 0) === RTL ? 1 : -1)); down = null; } });
 
   $$('a[href="#contact"]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); setMenu(false); go(slides.length - 1, 'auto'); }));
 
@@ -127,7 +130,7 @@
     dd.querySelectorAll('li').forEach(li => li.addEventListener('click', () => { dd.querySelectorAll('li').forEach(x => x.setAttribute('aria-selected', x === li)); ddVal.textContent = li.textContent; ddIn.value = li.textContent; closeDD(); }));
     document.addEventListener('click', e => { if (!dd.contains(e.target)) closeDD(); });
     addEventListener('keydown', e => { if (e.key === 'Escape') closeDD(); });
-    $('#form').addEventListener('submit', e => { e.preventDefault(); $('#formNote').textContent = 'תודה! הפנייה התקבלה, ומשרד הישיבה יחזור אליכם בהקדם.'; });
+    $('#form').addEventListener('submit', e => { e.preventDefault(); $('#formNote').textContent = T.sent; });
   }
 
   /* ---------- start ---------- */
