@@ -460,7 +460,6 @@ h2 .gold,.hero h1 .gold{background-image:linear-gradient(to left,#7E5E2A 0%,#C29
 
 /* ---------- English (ltr): classic serif titles, everything mirrored to read left to right ---------- */
 /* Levi's Latin set is all capitals: same family as the Hebrew titles, set a touch smaller and opened up */
-[lang="en"]{--font-body:'Assistant',system-ui,sans-serif}
 [lang="en"] h1,[lang="en"] h2{letter-spacing:.015em;line-height:1.08}
 [lang="en"] h2{font-size:clamp(2rem,3.4vw,3.8rem)}
 [lang="en"] .hist h2{font-size:clamp(1.9rem,min(3vw,5.6vh),3.4rem)}
