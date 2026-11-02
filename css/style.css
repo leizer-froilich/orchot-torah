@@ -144,6 +144,26 @@ h2 .gold,.hero h1 .gold{background-image:linear-gradient(to left,#7E5E2A 0%,#C29
 .hdr nav a{position:relative;color:var(--cream-70);transition:color .3s}
 .hdr nav a::after{content:"";position:absolute;inset-inline:0;bottom:-6px;height:1px;background:var(--gold);transform:scaleX(0);transition:transform .45s var(--ease)}
 .hdr nav a:hover{color:var(--parch)} .hdr nav a:hover::after{transform:scaleX(1)}
+/* "הישיבות": hovering opens all the institutions, on every page */
+.navd{display:inline-block}
+.navd>a::before{content:"";position:absolute;inset:100% -20px -34px}
+.navd__panel{position:absolute;top:calc(100% + 12px);inset-inline:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;padding:14px;border-radius:26px;
+  background:var(--parch);border:1px solid var(--gold);box-shadow:0 30px 60px -26px rgba(0,0,0,.65);opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .3s var(--ease),transform .4s var(--ease),visibility .3s}
+.navd:hover .navd__panel,.navd:focus-within .navd__panel{opacity:1;visibility:visible;transform:none}
+.hdr nav .navd__panel a{display:grid;justify-items:center;gap:2px;padding:12px 8px;border-radius:16px;color:var(--ink);text-align:center;line-height:1.25;transition:background .3s}
+.hdr nav .navd__panel a::after{display:none}
+.hdr nav .navd__panel a:hover{background:rgba(194,154,91,.2);color:var(--ink)}
+.navd__panel img{height:54px;width:100%;object-fit:contain;margin-bottom:4px}
+.navd__panel b{font-family:var(--font-display);font-size:1.0625rem}
+.navd__panel span{font-size:.8125rem;color:var(--ink-70)}
+.drawer{overflow-y:auto}
+.drawer__sub{justify-items:center;text-align:center}
+.drawer__sub summary{list-style:none;cursor:pointer;font-family:var(--font-display);font-size:clamp(2.1rem,9vw,3rem);font-weight:var(--w-bold)}
+.drawer__sub summary::-webkit-details-marker{display:none}
+.drawer__sub summary::after{content:"";display:inline-block;width:10px;height:10px;margin-inline-start:12px;border-left:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:rotate(-45deg) translateY(-6px);transition:transform .3s}
+.drawer__sub[open] summary::after{transform:rotate(135deg)}
+.drawer__sub div{display:grid;gap:6px;padding-block:8px}
+.drawer .drawer__sub a{font-family:var(--font-body);font-size:1.125rem;font-weight:var(--w-regular);color:var(--gold-hi)}
 .hdr__logo{display:block;height:56px}
 .hdr__logo img{height:100%;width:auto}
 .hdr__end{display:flex;align-items:center;justify-content:flex-end;gap:14px}
