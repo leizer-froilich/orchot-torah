@@ -524,6 +524,8 @@ h2 .gold,.hero h1 .gold{background-image:linear-gradient(to left,#7E5E2A 0%,#C29
   .logos__row{grid-template-columns:repeat(3,1fr);row-gap:26px}
   .ftr__top{grid-template-columns:1fr 1fr}
   .ftr__brand{grid-column:1/-1}
+  .ftr__top>div:last-child{grid-column:1/-1;text-align:center}.ftr__top>div:last-child ul{justify-items:center}
+  .ftr__bottom{flex-direction:column;align-items:center;text-align:center}
   .band__label{padding:16px 22px}
 }
 @media (prefers-reduced-motion:reduce){

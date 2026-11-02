@@ -86,7 +86,8 @@ body.life{overflow:hidden;background:var(--navy-deep)}
   body.life{overflow:hidden}
   .st{overflow-y:auto;overscroll-behavior-y:contain}
   .st__in{height:auto;min-height:100%;grid-template-columns:minmax(0,1fr)!important;align-content:start;gap:22px;padding:calc(var(--hd) + 52px) var(--margin) 110px}
-  .st__seal{top:38%;left:50%;width:128vw}
+  .st__seal{top:auto;bottom:90px;left:50%;width:112vw;transform:translateX(-50%)}
+  .st.is-open .st__seal{opacity:.1}
   .st__text{order:-1}
   .st__year{font-size:clamp(2.1rem,10vw,3rem)}
   .wall{height:auto;flex-wrap:wrap;gap:18px}
@@ -101,3 +102,10 @@ body.life{overflow:hidden;background:var(--navy-deep)}
 @media (prefers-reduced-motion:reduce){
   .st__cover{display:none}.fr,.st__text>*{opacity:1;transform:none}
 }
+
+/* last slide: the contact form and the footer, scrolled inside the slide */
+.st--foot{overflow-y:auto;overflow-x:hidden;scroll-snap-align:start;background:var(--navy);padding-bottom:96px}
+.st--foot::before,.st--foot::after{display:none}
+.st--foot .ftr{padding-bottom:40px}
+.st--foot #contact{padding-top:calc(var(--hd) + 40px)}
+.st--foot .ftr::before{background:radial-gradient(circle at 12px -4px,var(--navy) 12px,transparent 12.5px) 0 0/24px 14px repeat-x}

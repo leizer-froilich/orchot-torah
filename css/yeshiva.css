@@ -19,6 +19,7 @@
 
 /* team: arch portraits */
 .stfs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(30px,4vw,64px);justify-content:center}
+.stfs--6{grid-template-columns:repeat(3,minmax(0,280px))}
 .stfs--1{grid-template-columns:minmax(0,280px)} .stfs--2{grid-template-columns:repeat(2,minmax(0,280px))}
 .stf{display:grid;justify-items:center;text-align:center;gap:6px}
 .stf .archf{width:100%;margin-bottom:14px}
@@ -79,26 +80,30 @@
 .track__s div.links{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 14px;font-weight:var(--w-bold)}
 .track__s .links a{color:var(--gold-lo);border-bottom:1px solid transparent;transition:border-color .3s}
 .track__s .links a:hover{border-color:currentColor}
-.mapw{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,auto);gap:clamp(36px,6vw,110px);align-items:center}
-.map{height:min(68vh,720px);width:auto;max-width:100%;justify-self:center;overflow:visible}
+.mapw{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,.8fr);gap:clamp(24px,3vw,60px);align-items:start}
+.mapw>div{position:sticky;top:calc(var(--hd) + 34px)}
+.map{width:100%;height:auto;overflow:visible}
 .map .land{fill:rgba(235,211,154,.08);stroke:url(#gm);stroke-width:2.2;stroke-linejoin:round}
 .map .land2{fill:none;stroke:rgba(235,211,154,.28);stroke-width:1;transform-box:fill-box;transform-origin:center;transform:scale(1.035)}
 .map .water{fill:rgba(14,28,42,.55);stroke:rgba(235,211,154,.4);stroke-width:1}
-.map .k{fill:var(--gold-hi);opacity:.75;transition:r .3s}
 .map .pin{cursor:pointer}
 .map .pin circle{fill:var(--gold-hi);stroke:#fff8e0;stroke-width:1.5;transition:r .3s var(--ease)}
 .map .pin .halo{fill:rgba(235,211,154,.22);stroke:none;animation:mpulse 3s ease-in-out infinite}
+.map .pin line{stroke:rgba(235,211,154,.5);stroke-width:1}
+.map .pin--k circle{fill:var(--parch);stroke:var(--gold-hi)}
+.map .pin--k text{font-weight:var(--w-regular);fill:var(--gold-hi)}
+.map .pin.hot line{stroke:var(--gold-hi);stroke-width:2}
+.map .pin.hot text{fill:var(--gold-hi)}
 .map .pin text{font-family:var(--font-display);font-weight:var(--w-bold);font-size:27px;fill:var(--parch);paint-order:stroke;stroke:rgba(40,46,24,.7);stroke-width:2.5px}
 .map .pin.hot circle:not(.halo){r:10px}
 @keyframes mpulse{0%,100%{opacity:.45}50%{opacity:1}}
-.mlist{list-style:none;margin:0;padding:0;display:grid;gap:4px;min-width:min(100%,380px)}
-.mlist li{display:grid;grid-template-columns:7.5em 1fr;gap:14px;padding:10px 12px;border-bottom:1px solid rgba(235,211,154,.2);transition:background .3s}
+.mlist{list-style:none;margin:0;padding:0;display:grid}
+.mlist li{border-bottom:1px solid rgba(235,211,154,.2);transition:background .3s}
 .mlist li.hot{background:rgba(235,211,154,.12)}
-.mlist b{font-family:var(--font-display);font-size:1.25rem;color:var(--gold-hi)}
-.mlist div{display:grid;gap:1px}
-.mlist a{color:var(--parch)} .mlist a:hover{color:var(--gold-hi)}
+.mlist a{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:8px 10px;color:var(--parch)}
+.mlist b{font-family:var(--font-display);font-size:1.1875rem;color:var(--gold-hi)}
+.mlist span{font-size:.8125rem;color:var(--cream-70);text-align:end}
 .mnote{margin-top:16px;font-size:var(--fs-note);color:var(--cream-70)}
-.mnote i{display:inline-block;width:7px;height:7px;margin-inline-end:7px;border-radius:50%;background:var(--gold-hi);opacity:.75}
 .lead{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,1.6vw,24px);max-width:1240px;margin-inline:auto}
 .lead div{display:grid;gap:4px;justify-items:center;text-align:center;padding:22px 16px;border:1px solid var(--gold);background:rgba(255,250,235,.45)}
 .lead div:last-child{grid-column:1/-1}
@@ -120,7 +125,7 @@
 .ts::before{content:"";position:absolute;inset-inline-start:-42px;top:50%;width:13px;height:13px;margin-top:-6px;transform:rotate(45deg);border:1px solid var(--gold-lo);background:var(--parch);transition:background .5s,box-shadow .5s}
 .ts.on::before{background:var(--gold-hi);box-shadow:0 0 0 5px rgba(194,154,91,.22)}
 .ts:nth-child(odd) .ts__pic{order:2}
-.ts__seal{position:absolute;z-index:-1;top:50%;left:50%;width:min(620px,70%);transform:translate(-50%,-50%);opacity:.14;mix-blend-mode:multiply;pointer-events:none}
+.ts__seal{position:absolute;z-index:-1;top:50%;left:50%;width:min(620px,70%);transform:translate(-50%,-50%);opacity:.1;mix-blend-mode:multiply;pointer-events:none}
 .ts__pic{position:relative;aspect-ratio:3/2;margin:0;background:#EFE3CC;box-shadow:0 0 0 1px var(--gold-lo),0 0 0 6px var(--parch),0 0 0 7px rgba(194,154,91,.5),0 26px 40px -24px rgba(46,30,12,.7)}
 .ts__pic img,.ts__pic canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 .ts__pic img{object-fit:cover}
@@ -157,7 +162,11 @@
   .hf{width:min(100%,300px)}.hf:nth-child(2){margin-top:0}
   .track,.mapw{grid-template-columns:minmax(0,1fr)} .track__s:not(:last-child)::after{content:"↓";position:static;transform:none;grid-row:6}
   .prins{grid-template-columns:minmax(0,1fr)} .lead{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .map{height:auto;width:min(86%,340px)} .mlist{min-width:0}
+  .mapw>div{position:static}.map .pin text{font-size:32px}
+  .track__s:not(:last-child)::after{display:none}
+  .tl__side{display:none}
+  #build{padding-block:84px}.bld{grid-template-columns:minmax(0,1fr);row-gap:64px}.bld .archf{width:min(100%,290px);margin-top:30px}
+  .stfs--6{grid-template-columns:repeat(2,minmax(0,1fr))}
   .yh__in{padding-bottom:40px} .yh .ctas{display:grid;grid-auto-flow:row;width:100%}
   .wg{height:86svh;min-height:560px}.wg__plane{transform:translate(-50%,-50%) rotateX(34deg) rotateZ(-10deg) scale(1.1)}.wg__i{width:150px}
   .cities{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -185,3 +194,6 @@ body.royal{background:var(--navy-deep)}
 .rend h2{font-size:clamp(2.4rem,5vw,5.4rem)}
 .rend .s-head{margin:0}
 @media (prefers-reduced-motion:reduce){.rbg img{animation:none}.rbg img:first-child{opacity:1}}
+
+/* the contact form sits straight on the footer on every page */
+#contact + .ftr::before{background:radial-gradient(circle at 12px -4px,var(--navy) 12px,transparent 12.5px) 0 0/24px 14px repeat-x}

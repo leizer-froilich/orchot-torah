@@ -102,6 +102,8 @@
   let lock = 0, acc = 0;
   track.addEventListener('wheel', e => {
     if (innerWidth <= 820) return;
+    const here = slides[cur];
+    if (here.classList.contains('st--foot') && (e.deltaY > 0 || here.scrollTop > 0)) return;   // the last slide scrolls by itself
     if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;     // a horizontal swipe is the browser's own
     e.preventDefault();
     const now = performance.now(); if (now < lock) return;
@@ -113,6 +115,20 @@
   let down = null;
   track.addEventListener('pointerdown', e => { if (e.pointerType === 'mouse' && !e.target.closest('a,button')) down = { x: e.clientX }; });
   addEventListener('pointerup', e => { if (down) { const dx = e.clientX - down.x; if (Math.abs(dx) > 70) go(cur + (dx > 0 ? 1 : -1)); down = null; } });
+
+  $$('a[href="#contact"]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); setMenu(false); go(slides.length - 1, 'auto'); }));
+
+  /* ---------- contact form: custom dropdown + demo submit ---------- */
+  const dd = $('#dd');
+  if (dd) {
+    const ddBtn = dd.querySelector('.dd__btn'), ddVal = $('#dd-val'), ddIn = dd.querySelector('input');
+    const closeDD = () => { dd.classList.remove('is-open'); ddBtn.setAttribute('aria-expanded', false); };
+    ddBtn.addEventListener('click', () => { const o = !dd.classList.contains('is-open'); dd.classList.toggle('is-open', o); ddBtn.setAttribute('aria-expanded', o); });
+    dd.querySelectorAll('li').forEach(li => li.addEventListener('click', () => { dd.querySelectorAll('li').forEach(x => x.setAttribute('aria-selected', x === li)); ddVal.textContent = li.textContent; ddIn.value = li.textContent; closeDD(); }));
+    document.addEventListener('click', e => { if (!dd.contains(e.target)) closeDD(); });
+    addEventListener('keydown', e => { if (e.key === 'Escape') closeDD(); });
+    $('#form').addEventListener('submit', e => { e.preventDefault(); $('#formNote').textContent = 'תודה! הפנייה התקבלה, ומשרד הישיבה יחזור אליכם בהקדם.'; });
+  }
 
   /* ---------- start ---------- */
   const hash = +location.hash.replace('#s', '') || 0;

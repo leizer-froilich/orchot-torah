@@ -32,7 +32,8 @@
   $$('.reveal').forEach(el => io.observe(el));
   $$('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
     const t = a.getAttribute('href').length > 1 && $(a.getAttribute('href')); if (!t) return;
-    e.preventDefault(); scrollTo({ top: t.getBoundingClientRect().top + scrollY - 20, behavior: RM ? 'auto' : 'smooth' });
+    e.preventDefault(); setMenu(false);
+    scrollTo({ top: t.getBoundingClientRect().top + scrollY - 20, behavior: RM || t.id === 'contact' ? 'auto' : 'smooth' });
   }));
 
   /* ---------- hero: parchment over the photo, erased by growing ink blots ---------- */
@@ -153,6 +154,33 @@
         sk.complete && sk.naturalWidth ? run() : (sk.onload = run);
       }, { threshold: .45 }).observe(pic);
     });
+  }
+
+  /* ---------- network map: hovering a point floats that institution's photo ---------- */
+  const pv = $('#lprev');
+  if (pv && !matchMedia('(hover: none)').matches) {
+    const pi = pv.querySelector('img'), pb = pv.querySelector('.plate b'), ps = pv.querySelector('.plate span');
+    $$('.pin').forEach(p => {
+      p.addEventListener('pointerenter', () => {
+        pi.src = p.dataset.img; pb.textContent = p.dataset.name; ps.textContent = p.dataset.sub;
+        const r = p.querySelectorAll('circle')[p.querySelectorAll('circle').length - 1].getBoundingClientRect(), w = pv.offsetWidth, h = pv.offsetHeight;
+        const x = clamp(r.left + r.width / 2 - w / 2, 12, innerWidth - w - 12), y = r.top - h - 18 > 12 ? r.top - h - 18 : r.bottom + 18;
+        pv.style.transform = `translate3d(${x}px,${y}px,0)`; pv.classList.add('on');
+      });
+      p.addEventListener('pointerleave', () => pv.classList.remove('on'));
+    });
+  }
+
+  /* ---------- contact form: custom dropdown + demo submit ---------- */
+  const dd = $('#dd');
+  if (dd) {
+    const ddBtn = dd.querySelector('.dd__btn'), ddVal = $('#dd-val'), ddIn = dd.querySelector('input');
+    const closeDD = () => { dd.classList.remove('is-open'); ddBtn.setAttribute('aria-expanded', false); };
+    ddBtn.addEventListener('click', () => { const o = !dd.classList.contains('is-open'); dd.classList.toggle('is-open', o); ddBtn.setAttribute('aria-expanded', o); });
+    dd.querySelectorAll('li').forEach(li => li.addEventListener('click', () => { dd.querySelectorAll('li').forEach(x => x.setAttribute('aria-selected', x === li)); ddVal.textContent = li.textContent; ddIn.value = li.textContent; closeDD(); }));
+    document.addEventListener('click', e => { if (!dd.contains(e.target)) closeDD(); });
+    addEventListener('keydown', e => { if (e.key === 'Escape') closeDD(); });
+    $('#form').addEventListener('submit', e => { e.preventDefault(); $('#formNote').textContent = 'תודה! הפנייה התקבלה, ומשרד הישיבה יחזור אליכם בהקדם.'; });
   }
 
   /* ---------- gold sparks in the buttons ---------- */

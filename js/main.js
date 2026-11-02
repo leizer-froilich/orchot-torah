@@ -44,8 +44,9 @@
     const id = a.getAttribute('href'); if (id.length < 2) return;
     const t = document.querySelector(id); if (!t) return; e.preventDefault(); setMenu(false);
     const off = id === '#top' ? 0 : -(MOBILE() ? 70 : 20);
-    if (lenis) lenis.scrollTo(t, { offset: off, duration: 1.4 });
-    else scrollTo({ top: t.getBoundingClientRect().top + scrollY + off, behavior: RM ? 'auto' : 'smooth' });
+    const now = id === '#contact';   // contact jumps straight to the bottom
+    if (lenis) lenis.scrollTo(t, now ? { offset: off, immediate: true, force: true } : { offset: off, duration: 1.4 });
+    else scrollTo({ top: t.getBoundingClientRect().top + scrollY + off, behavior: RM || now ? 'auto' : 'smooth' });
   }));
 
   /* ---------- titles: wrap plain text in .tf so each part fills in from its gold contour, in reading direction ---------- */
