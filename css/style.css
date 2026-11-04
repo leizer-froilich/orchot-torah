@@ -540,3 +540,8 @@ h2 .gold,.hero h1 .gold{background-image:linear-gradient(to left,#7E5E2A 0%,#C29
   .reveal,.hero [data-in]{opacity:1;transform:none;filter:none}
   .net__pin,.hist__pin{height:auto}.net__stage,.hist__stage{position:static;height:auto}
 }
+
+/* the Torah B'Tifartah logo is wider than the others: lift it to the same visual size */
+.logos__row img[src$="torah-btifartah.png"],.ynext__row img[src$="torah-btifartah.png"]{transform:scale(1.18)}
+.logos__row img[src$="torah-btifartah.png"]:hover{transform:scale(1.18) translateY(-4px)}
+.ycard .arch img.ycard__logo[src$="torah-btifartah.png"]{width:48%}
