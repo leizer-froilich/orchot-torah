@@ -235,3 +235,4 @@ body.royal{background:var(--navy-deep)}
 .rabs span{font-size:var(--fs-note);color:var(--gold-hi)}
 [lang="en"] .rabs b{font-size:clamp(.95rem,1.1vw,1.1rem);letter-spacing:.02em}
 @media (max-width:600px){.rabs li{flex-basis:46%}}
+.rabs--only{margin-top:0}
